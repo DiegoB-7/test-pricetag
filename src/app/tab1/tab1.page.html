@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
+    <ion-title >
+      <div class="centered-text">
+        <p>Inicio</p>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list [inset]="true" lines="full">
+    <ion-list-header>
+      <ion-label>Productos</ion-label>
+    </ion-list-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Silhouette of mountains" src="{{product.image}}" />
+        </ion-thumbnail>
+        <ion-label> {{product.name}} </ion-label>
+      </ion-item>
+
+      <ion-item-options>
+        <ion-item-option color="primary">
+          <ion-icon name="create-outline"></ion-icon>
+
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteProduct(product.id)">
+          <ion-icon slot="bottom"name="trash-outline"></ion-icon>
+
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="openCreateProductModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
 </ion-content>

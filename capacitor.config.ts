@@ -4,9 +4,15 @@ const config: CapacitorConfig = {
   appId: 'io.ionic.starter',
   appName: 'test-pricetagpro',
   webDir: 'www',
+  plugins: {
+    CapacitorHttp: {
+      enabled: true,
+    },
+  },
   server: {
     androidScheme: 'https'
-  }
+  },
+
 };
 
 export default config;

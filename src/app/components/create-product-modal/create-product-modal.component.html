@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="danger" (click)="cancel()" [strong]="true">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title >
+      <div class="centered-text">
+        <p>Registrar Producto</p>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true" color="success">Guardar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input label="Nombre" labelPlacement="floating" placeholder="..." [(ngModel)]="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-textarea label="Descripción" labelPlacement="floating" placeholder="..." [(ngModel)]="description"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-input label="Precio" labelPlacement="floating" placeholder="$$$" [(ngModel)]="price" type="text"
+    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); if (this.value === '' || parseFloat(this.value) <= 0) this.value = '';"></ion-input>
+  </ion-item>
+  <ion-item>
+    <input type="file" (change)="onFileSelected($event)"/>
+  </ion-item>
+  <div *ngIf="image" >
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Previsualización de imagen</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="container">
+          <img [src]="image" alt="image" class="custom-image"/>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

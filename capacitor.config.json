@@ -1,3 +1,8 @@
 {
-  "appName": "test-pricetagpro"
+  "appName": "test-pricetagpro",
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
 }
