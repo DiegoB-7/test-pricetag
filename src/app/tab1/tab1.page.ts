@@ -4,7 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { CreateProductModalComponent } from '../components/create-product-modal/create-product-modal.component';
 import { ToastController,AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
-
+import { ipcRenderer } from 'electron';
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -92,6 +93,22 @@ export class Tab1Page {
 
 
   }
+  async  testpic() {
+    const previousUrl = window.location.href;  // Obtener la URL de la página actual
+
+    await Browser.open({ url: 'http://192.168.1.65/url?valor=restart' });
+
+    // Esperar un tiempo para que la página se cargue completamente (ajusta el valor según tus necesidades)
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    await Browser.close();
+
+    // Redirigir a la página anterior si la ventana actual se cerró correctamente
+    if (window.closed) {
+      window.location.href = previousUrl;
+    }
+  }
+
 
   async deleteProduct(id:any){
 
